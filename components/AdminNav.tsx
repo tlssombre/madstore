@@ -1,0 +1,9 @@
+import { getCurrentStaff } from '@/lib/auth';
+import AdminLogout from './AdminLogout';
+import AdminNavClient from './AdminNavClient';
+import AdminSideDrawer from './AdminSideDrawer';
+import { PermissionKey } from '@/lib/permissions';
+const items:{href?:string;label:string;permission?:PermissionKey;icon:string}[]=[
+ {href:'/admin',label:'Dashboard',permission:'dashboard.view',icon:'dashboard'}, {href:'/admin/commandes',label:'Commandes',permission:'orders.view',icon:'orders'}, {href:'/admin/produits',label:'Produits',permission:'products.view',icon:'products'}, {href:'/admin/categories',label:'Catégories',permission:'products.view',icon:'categories'}, {href:'/admin/stocks',label:'Stocks',permission:'stock.view',icon:'stock'}, {href:'/admin/promotions',label:'Promotions',permission:'promotions.view',icon:'promotions'}, {label:'Livraison',permission:'delivery.view',icon:'delivery'}, {href:'/admin/contenu',label:'Contenu',permission:'content.view',icon:'content'}, {href:'/admin/employes',label:'Employés & permissions',permission:'staff.view',icon:'staff'}, {href:'/admin/journal',label:'Journal d’activité',permission:'settings.view',icon:'audit'}, {label:'Paramètres',permission:'settings.view',icon:'settings'},
+];
+export default async function AdminNav(){const staff=await getCurrentStaff();if(!staff)return null;const allowed=(p?:PermissionKey)=>!p||staff.isOwner||staff.permissionKeys.includes(p);const nav=items.filter(i=>allowed(i.permission)).map(({href,label,icon})=>({href,label,icon}));return <AdminSideDrawer><div className="adminBrand"><img src="/brand/logo-transparent.png" alt="MadStore2"/><span>Console de gestion</span></div><div className="adminIdentity"><span>{staff.name.split(' ').map(n=>n[0]).slice(0,2).join('')}</span><div><strong>{staff.name}</strong><small>{staff.isOwner?'Propriétaire':staff.email}</small></div></div><AdminNavClient items={nav}/><AdminLogout/></AdminSideDrawer>}

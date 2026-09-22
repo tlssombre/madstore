@@ -1,0 +1,2 @@
+import {NextResponse} from 'next/server';import {prisma} from '@/lib/prisma';import {validatePromoCode} from '@/lib/commerce-pricing';
+export async function POST(req:Request){const b=await req.json().catch(()=>({}));const subtotal=Math.max(0,Number(b.subtotal||0));const shipping=Math.max(0,Number(b.shipping||0));const r=await validatePromoCode(prisma,String(b.code||''),subtotal,shipping);if(r.error)return NextResponse.json({error:r.error},{status:400});return NextResponse.json({code:r.promo?.code||null,label:r.promo?.label||null,discount:r.discount,shipping:r.shipping});}

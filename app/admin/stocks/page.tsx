@@ -1,0 +1,2 @@
+import {requirePermission} from '@/lib/auth';import AdminNav from '@/components/AdminNav';import AdminStock from '@/components/AdminStock';
+export default async function Stocks(){await requirePermission('stock.view');return <main className="admin"><AdminNav/><section><p className="eyebrow">INVENTAIRE</p><h1>Stocks</h1><p className="adminLead">Disponible, réservé et historique des mouvements par variante.</p><AdminStock/></section></main>}

@@ -1,0 +1,1 @@
+'use client';import {Printer} from 'lucide-react';export default function InvoicePrintButton(){return <button className="printInvoice" onClick={()=>window.print()}><Printer/> Imprimer / enregistrer en PDF</button>}

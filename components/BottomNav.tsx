@@ -1,0 +1,2 @@
+import Link from 'next/link'; import {ShoppingBag,Smartphone,Bot,Headphones,Wrench} from 'lucide-react';
+export default function BottomNav(){return <nav className="bottomNav"><Link href="/catalogue"><ShoppingBag/><span>Acheter</span></Link><Link href="/catalogue?brand=Apple"><Smartphone/><span>iPhone</span></Link><Link href="/catalogue?brand=Android"><Bot/><span>Android</span></Link><Link href="/catalogue"><Headphones/><span>Accessoires</span></Link><Link href="/catalogue"><Wrench/><span>Réparation</span></Link></nav>}

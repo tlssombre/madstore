@@ -1,0 +1,3 @@
+import Header from '@/components/Header';import BottomNav from '@/components/BottomNav';import ProductCard from '@/components/ProductCard';import {getStoreProducts} from '@/lib/catalog';
+export const dynamic='force-dynamic';
+export default async function Promotions(){const products=(await getStoreProducts()).filter(p=>p.promotion);return <><Header/><main className="wrap promoPage"><div className="catalogTitle"><div><span className="sectionKicker">OFFRES EN COURS</span><h1>Promotions</h1><p>Les remises actives sont calculées à partir des prix réellement enregistrés dans le catalogue.</p></div></div><div className="grid">{products.map(p=><ProductCard key={p.slug} p={p}/>)}</div></main><BottomNav/></>}

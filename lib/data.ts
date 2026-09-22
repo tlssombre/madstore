@@ -1,0 +1,36 @@
+export type ProductVariantView={id:string;sku:string;label:string;color:string;storage:string;memory:string;price:number;compareAtPrice?:number;stock:number;stockOnHand?:number;stockReserved?:number};
+export type Product = {
+  id?:string; variantId?:string; imageUrl?:string; images?:string[]; status?:string; variants?:ProductVariantView[];
+  slug:string; name:string; shortName:string; category:string; brand:string; price:string; priceValue:number; oldPrice?:string; oldPriceValue?:number; tag:string;
+  tone:string; kind:'phone'|'laptop'|'watch'|'earbuds'|'tablet'|'console'|'speaker'|'accessory'; color:string; storage:string; memory?:string;
+  sku:string; stock:number; description:string; specs:[string,string][];
+  isNew?:boolean; featured?:boolean; bestseller?:boolean; promotion?:boolean; promoStart?:string; promoEnd?:string;
+};
+
+export const formatPrice=(value:number)=>new Intl.NumberFormat('fr-FR').format(value).replace(/\u202f/g,'.')+' F CFA';
+export const discountPercent=(p:Product)=>p.oldPriceValue&&p.oldPriceValue>p.priceValue?Math.round((1-p.priceValue/p.oldPriceValue)*100):0;
+
+export const products:Product[]=[
+ {slug:'iphone-17-pro',name:'iPhone 17 Pro 256 Go',shortName:'iPhone 17 Pro',category:'iPhone',brand:'Apple',price:'949.000 F CFA',priceValue:949000,oldPrice:'999.000 F CFA',oldPriceValue:999000,tag:'NOUVEAU',isNew:true,featured:true,promotion:true,promoStart:'2026-09-18',promoEnd:'2026-10-05',tone:'silver',kind:'phone',color:'Titane naturel',storage:'256 Go',memory:'8 Go',sku:'MAD-IP17P-256-TN',stock:8,description:'Smartphone Apple neuf, finition premium, sélectionné et contrôlé par MadStore2.',specs:[['Écran','OLED Super Retina XDR'],['Puce','Apple Silicon Pro'],['Stockage','256 Go'],['Réseau','5G'],['Garantie','12 mois']]},
+ {slug:'iphone-16',name:'iPhone 16 128 Go',shortName:'iPhone 16',category:'iPhone',brand:'Apple',price:'695.000 F CFA',priceValue:695000,oldPrice:'749.000 F CFA',oldPriceValue:749000,tag:'PROMO',featured:true,bestseller:true,promotion:true,promoStart:'2026-09-20',promoEnd:'2026-09-30',tone:'pink',kind:'phone',color:'Rose',storage:'128 Go',memory:'8 Go',sku:'MAD-IP16-128-PK',stock:12,description:'iPhone 16 neuf avec garantie 12 mois et contrôle qualité MadStore2.',specs:[['Écran','6,1 pouces OLED'],['Puce','A18'],['Stockage','128 Go'],['Appareil photo','Double capteur'],['Garantie','12 mois']]},
+ {slug:'macbook-pro-m5',name:'MacBook Pro 14 pouces M5 Pro 24 Go / 2 To',shortName:'MacBook Pro 14',category:'Mac',brand:'Apple',price:'2.599.000 F CFA',priceValue:2599000,tag:'NOUVEAU',isNew:true,featured:true,tone:'dark',kind:'laptop',color:'Noir sidéral',storage:'2 To',memory:'24 Go',sku:'MAD-MBP14-M5-2T',stock:4,description:'MacBook Pro 14 pouces haut de gamme pour création, développement et usage professionnel intensif.',specs:[['Écran','14,2” Liquid Retina XDR'],['Puce','Apple M5 Pro'],['Processeur','18 cœurs CPU'],['GPU','20 cœurs GPU'],['Mémoire','24 Go'],['Stockage','2 To']]},
+ {slug:'macbook-air-m4',name:'MacBook Air 13 pouces M4 16 Go / 512 Go',shortName:'MacBook Air M4',category:'Mac',brand:'Apple',price:'1.049.000 F CFA',priceValue:1049000,oldPrice:'1.149.000 F CFA',oldPriceValue:1149000,tag:'PROMO',featured:true,promotion:true,promoStart:'2026-09-15',promoEnd:'2026-10-15',tone:'blue',kind:'laptop',color:'Bleu ciel',storage:'512 Go',memory:'16 Go',sku:'MAD-MBA13-M4-512',stock:7,description:'MacBook Air léger, silencieux et performant pour travail, études et mobilité.',specs:[['Écran','13,6” Liquid Retina'],['Puce','Apple M4'],['Mémoire','16 Go'],['Stockage','512 Go'],['Autonomie','Jusqu’à 18 h']]},
+ {slug:'ipad-pro-m4',name:'iPad Pro 11 pouces M4 Wi‑Fi 256 Go',shortName:'iPad Pro M4',category:'iPad',brand:'Apple',price:'899.000 F CFA',priceValue:899000,tag:'BEST-SELLER',bestseller:true,featured:true,tone:'light',kind:'tablet',color:'Argent',storage:'256 Go',memory:'8 Go',sku:'MAD-IPADP11-256',stock:6,description:'Tablette premium ultra fine pour création, productivité et divertissement.',specs:[['Écran','11” Ultra Retina XDR'],['Puce','Apple M4'],['Stockage','256 Go'],['Connectivité','Wi‑Fi 6E'],['Garantie','12 mois']]},
+ {slug:'apple-watch-series-11',name:'Apple Watch Series 11 GPS 46 mm',shortName:'Apple Watch S11',category:'Watch',brand:'Apple',price:'349.000 F CFA',priceValue:349000,tag:'NOUVEAU',isNew:true,tone:'dark',kind:'watch',color:'Noir',storage:'64 Go',sku:'MAD-AWS11-46-BK',stock:9,description:'Montre connectée Apple avec suivi sport, notifications et fonctions santé.',specs:[['Boîtier','46 mm'],['Connexion','GPS'],['Écran','Always-On'],['Étanchéité','50 m'],['Garantie','12 mois']]},
+ {slug:'airpods-pro-3',name:'AirPods Pro 3 avec boîtier MagSafe',shortName:'AirPods Pro 3',category:'Audio',brand:'Apple',price:'189.000 F CFA',priceValue:189000,oldPrice:'219.000 F CFA',oldPriceValue:219000,tag:'PROMO',bestseller:true,promotion:true,promoStart:'2026-09-21',promoEnd:'2026-10-01',tone:'light',kind:'earbuds',color:'Blanc',storage:'—',sku:'MAD-APP3-WH',stock:18,description:'Écouteurs sans fil avec réduction de bruit active et boîtier de charge MagSafe.',specs:[['Audio','Réduction de bruit active'],['Mode','Transparence'],['Charge','USB‑C / MagSafe'],['Résistance','IP54'],['Garantie','12 mois']]},
+ {slug:'ps5-slim',name:'PlayStation 5 Slim Édition Standard',shortName:'PS5 Slim',category:'Gaming',brand:'Sony',price:'499.000 F CFA',priceValue:499000,tag:'BEST-SELLER',bestseller:true,featured:true,tone:'light',kind:'console',color:'Blanc',storage:'1 To',sku:'MAD-PS5-SLIM-1T',stock:5,description:'Console PlayStation 5 Slim neuve avec lecteur de disque et stockage SSD 1 To.',specs:[['Stockage','SSD 1 To'],['Résolution','Jusqu’à 4K'],['Fréquence','Jusqu’à 120 Hz'],['Lecteur','Blu‑ray Ultra HD'],['Garantie','12 mois']]},
+ {slug:'jbl-charge-6',name:'JBL Charge 6 Bluetooth',shortName:'JBL Charge 6',category:'Audio',brand:'JBL',price:'129.000 F CFA',priceValue:129000,tag:'EN STOCK',tone:'orange',kind:'speaker',color:'Noir',storage:'—',sku:'MAD-JBL-C6-BK',stock:11,description:'Enceinte Bluetooth portable puissante avec batterie longue durée.',specs:[['Connexion','Bluetooth'],['Autonomie','Jusqu’à 24 h'],['Résistance','Eau et poussière'],['Charge','USB‑C'],['Garantie','6 mois']]},
+ {slug:'magic-keyboard-ipad',name:'Magic Keyboard pour iPad Pro 11 pouces',shortName:'Magic Keyboard',category:'Accessoires',brand:'Apple',price:'239.000 F CFA',priceValue:239000,tag:'ACCESSOIRE',tone:'light',kind:'accessory',color:'Noir',storage:'—',sku:'MAD-MK-IPAD11-BK',stock:10,description:'Clavier Magic Keyboard pour iPad Pro, avec trackpad intégré et connecteur USB‑C.',specs:[['Compatibilité','iPad Pro 11 pouces'],['Trackpad','Oui'],['Rétroéclairage','Oui'],['Connexion','Smart Connector'],['Garantie','6 mois']]}
+];
+
+export const featured=products.filter(p=>p.featured);
+export const newProducts=products.filter(p=>p.isNew);
+export const promoProducts=products.filter(p=>p.promotion);
+export const bestsellers=products.filter(p=>p.bestseller);
+export const findProduct=(slug:string)=>products.find(p=>p.slug===slug)||products[0];
+
+export const promoCodes={
+  BIENVENUE10:{type:'percent' as const,value:10,label:'-10 % sur la commande'},
+  MAD5000:{type:'fixed' as const,value:5000,label:'-5.000 F CFA'},
+  LIVRAISON:{type:'shipping' as const,value:0,label:'Livraison offerte'}
+};

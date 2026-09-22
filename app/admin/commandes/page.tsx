@@ -1,0 +1,2 @@
+import {requirePermission} from '@/lib/auth';import AdminNav from '@/components/AdminNav';import AdminOrders from '@/components/AdminOrders';
+export default async function AdminCommandes(){await requirePermission('orders.view');return <main className="admin"><AdminNav/><section><p className="eyebrow">VENTES</p><h1>Commandes</h1><p className="adminLead">Commandes réelles, réservation de stock et progression opérationnelle.</p><AdminOrders/></section></main>}

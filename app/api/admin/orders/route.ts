@@ -1,0 +1,2 @@
+import {NextResponse} from 'next/server';import {getApiStaff} from '@/lib/auth';import {prisma} from '@/lib/prisma';
+export async function GET(){const auth=await getApiStaff('orders.view');if(!auth.ok)return NextResponse.json({error:'Accès refusé.'},{status:auth.status});const orders=await prisma.order.findMany({include:{items:true},orderBy:{createdAt:'desc'},take:200});return NextResponse.json({orders});}
